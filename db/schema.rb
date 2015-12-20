@@ -11,9 +11,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20151122162007) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "courses", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "image_url"
+    t.integer  "institution_id"
+    t.integer  "instructor_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "courses", ["institution_id"], name: "index_courses_on_institution_id", using: :btree
+  add_index "courses", ["instructor_id"], name: "index_courses_on_instructor_id", using: :btree
+  add_index "courses", ["name"], name: "index_courses_on_name", using: :btree
+
+  create_table "institutions", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "image"
+    t.integer  "institution_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "institutions", ["institution_id"], name: "index_institutions_on_institution_id", using: :btree
+  add_index "institutions", ["name"], name: "index_institutions_on_name", using: :btree
+
+  create_table "instructors", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "image"
+    t.integer  "institution_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "instructors", ["institution_id"], name: "index_instructors_on_institution_id", using: :btree
+  add_index "instructors", ["name"], name: "index_instructors_on_name", using: :btree
+
+  add_foreign_key "courses", "institutions"
+  add_foreign_key "courses", "instructors"
+  add_foreign_key "institutions", "institutions"
+  add_foreign_key "instructors", "institutions"
 end
