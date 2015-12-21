@@ -25,6 +25,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'pg'
 
+gem 'apipie-rails'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -51,6 +53,8 @@ end
 
 group :development do
   gem 'guard-rspec', require: false
+  gem 'metric_fu'
+  gem 'pry'
 end
 
 group :test do
