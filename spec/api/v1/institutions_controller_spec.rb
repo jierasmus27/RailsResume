@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Api::V1::InstitutionsController, type: "controller" do
+describe Api::V1::InstitutionsController, type: :controller do
   context "index calls" do
     it "returns a list of all institutions" do
       institution_ucla = create(:institution, name: "UCLA")

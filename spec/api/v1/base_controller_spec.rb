@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Api::V1::BaseController, type: "controller" do
+describe Api::V1::BaseController, type: :controller do
   context "base methods" do
     it "raises an error that base_model is not defined" do
       bc = Api::V1::BaseController.new
