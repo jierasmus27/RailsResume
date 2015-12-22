@@ -3,4 +3,5 @@ class Instructor < ActiveRecord::Base
   belongs_to :institution
 
   validates :name, presence: true, uniqueness: true
+  validates :institution, presence: true
 end
