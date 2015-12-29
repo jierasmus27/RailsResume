@@ -15,15 +15,21 @@ describe Api::V1::InstitutionsController, type: :controller do
     it "shows details of the requested institution" do
       institution = create(:institution, name: "UCLA")
 
-      get :show, {controller: "/api/v1/institutions", action: "show", id: institution.id}
+      get :show, id: institution.id
       expect(assigns(:data)).to eq(institution)
     end
 
     it "returns an http_not_found if the institution cannot be found" do
       institution = create(:institution, name: "UCLA")
 
-      get :show, {controller: "/api/v1/institutions", action: "show", id: institution.id + 100}
+      get :show, id: institution.id + 100
       expect(response).to have_http_status(:not_found)
+    end
+  end
+
+  context "create calls" do
+    it "successfully creates a new institution for a valid entity" do
+      expect{post :create, institution: attributes_for(:institution)}.to change(Institution, :count).by(1)
     end
   end
 end

@@ -6,9 +6,23 @@ class Api::V1::BaseController < ApplicationController
     render json: @data
   end
 
+  def create
+    @data = model.new(controller_params)
+
+    if @data.save
+      render json: @data, status: :created
+    else
+      render json: @data.errors, status: :unprocessable_entity
+    end
+  end
+
   private
 
     def model
+      raise NotImplementedError
+    end
+
+    def controller_params
       raise NotImplementedError
     end
 
