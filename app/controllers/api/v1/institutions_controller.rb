@@ -13,7 +13,7 @@ class Api::V1::InstitutionsController < Api::V1::BaseController
     param "Content-Type", String, "Header value, must be equal to 'application/json'"
   end
 
-  api :GET, '/institutions', 'List all Countries'
+  api :GET, '/institutions', 'List all Institutions'
   description "Returns an array of hashes containing all the institution data used in the application."
   this_example = JSON.parse '[{"id": 1,"name": "Coursera", "description":"Online Institution", "created_at": "2015-10-27T16:08:29.099Z"}]'
   example "Response:\n#{JSON.pretty_generate(this_example)}"
@@ -22,7 +22,7 @@ class Api::V1::InstitutionsController < Api::V1::BaseController
     super
   end
 
-  api :GET, '/institutions/:id', 'Gets an institution based on the id'
+  api :GET, '/institutions/:id', 'Return data of an Institution based on the id'
   param_group :id
   error 404, "Record Not Found"
   description "Returns a hash with institution details based on the id passed through"
