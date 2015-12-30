@@ -31,5 +31,15 @@ describe Api::V1::InstitutionsController, type: :controller do
     it "successfully creates a new institution for a valid entity" do
       expect{post :create, institution: attributes_for(:institution)}.to change(Institution, :count).by(1)
     end
+
+    it "returns unprocessable_entity for an invalid entity - no name provided" do
+      post :create, institution: {"name" => nil, "description" => "University of California - Berkeley"}
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
+
+    it "returns unprocessable_entity for an invalid entity - no description provided" do
+      post :create, institution: {"name" => "UC Berkeley", "description" => nil}
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
   end
 end
