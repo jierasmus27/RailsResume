@@ -16,6 +16,14 @@ class Api::V1::BaseController < ApplicationController
     end
   end
 
+  def update
+    if @data.update(controller_params)
+      render(json: @data, status: :ok)
+    else
+      render(json: @data.errors, status: :unprocessable_entity)
+    end
+  end
+
   private
 
     def model

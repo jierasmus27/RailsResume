@@ -1,6 +1,6 @@
 class Api::V1::InstitutionsController < Api::V1::BaseController
 
-  before_action :set_object_from_id, only: [:show]
+  before_action :set_object_from_id, only: [:show, :update]
 
   def_param_group :id do
     param :id, :number, "Institution ID", :required => true
@@ -42,6 +42,18 @@ class Api::V1::InstitutionsController < Api::V1::BaseController
   example "Response:\n#{JSON.pretty_generate(this_example)}"
 
   def create
+    super
+  end
+
+  api :PUT, '/countries/:id', 'Update an institution'
+  error :code => 404, :desc => "Not Found"
+  description "Updates an institution entry based on the id and params passed"
+  req_example = JSON.parse '{"name": "New Institution Name"}'
+  example "Request\ncountries/\n#{JSON.pretty_generate(req_example)}"
+  this_example = JSON.parse '{"id": 7,"name": "Test1","code": "12234","shortname": "TE","created_at": "2015-10-28T11:52:43.127Z","updated_at": "2015-10-28T12:29:11.818Z"}'
+  example "Response:\n#{JSON.pretty_generate(this_example)}"
+
+  def update
     super
   end
 
