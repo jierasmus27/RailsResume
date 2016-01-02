@@ -1,3 +1,4 @@
+# Base Controller which the rest of the API controllers can inherit from
 class Api::V1::BaseController < ApplicationController
 
   def index
@@ -37,7 +38,7 @@ class Api::V1::BaseController < ApplicationController
     def set_object_from_id
       begin
         @data = model.find(params[:id])
-      rescue ActiveRecord::RecordNotFound  => e
+      rescue ActiveRecord::RecordNotFound  => record_error
         record_not_found('record not found')
       end
     end
