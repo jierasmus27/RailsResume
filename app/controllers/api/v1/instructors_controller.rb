@@ -45,6 +45,18 @@ class Api::V1::InstructorsController < Api::V1::BaseController
     super
   end
 
+  api :PATCH, '/instructors/:id', 'Update an instructor'
+  error :code => 404, :desc => "Not Found"
+  description "Updates an instructor entry based on the id and params passed"
+  req_example = JSON.parse '{"name": "New Instructor Name"}'
+  example "Request\ninstructors/\n#{JSON.pretty_generate(req_example)}"
+  this_example = JSON.parse '{"name": "Ben Smith", "description":"Online Instructor", "created_at": "2015-10-27T16:08:29.099Z"}'
+  example "Response:\n#{JSON.pretty_generate(this_example)}"
+
+  def update
+    super
+  end
+
   private
     def model
       Instructor

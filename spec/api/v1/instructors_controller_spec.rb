@@ -81,13 +81,7 @@ describe Api::V1::InstructorsController, type: :controller do
 
       get :show, id: @instructor.id
 
-      expect(JSON.parse(response.body)["instructor"]["name"]).to eq("Craig Brown")
-    end
-
-    it "returns unprocessable_entity for an invalid entity - duplicate name provided" do
-      instructor = create(:instructor, name: "Brian Johnson")
-      patch :update, id: @instructor, instructor: {"name" => "Brian Johnson", "description" => "University of California - Berkeley"}
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(JSON.parse(response.body)["name"]).to eq("Craig Brown")
     end
 
     it "returns unprocessable_entity for an invalid entity - no name provided" do

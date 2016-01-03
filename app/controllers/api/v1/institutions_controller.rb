@@ -45,12 +45,12 @@ class Api::V1::InstitutionsController < Api::V1::BaseController
     super
   end
 
-  api :PUT, '/countries/:id', 'Update an institution'
+  api :PATCH, '/institutions/:id', 'Update an institution'
   error :code => 404, :desc => "Not Found"
   description "Updates an institution entry based on the id and params passed"
   req_example = JSON.parse '{"name": "New Institution Name"}'
-  example "Request\ncountries/\n#{JSON.pretty_generate(req_example)}"
-  this_example = JSON.parse '{"id": 7,"name": "Test1","code": "12234","shortname": "TE","created_at": "2015-10-28T11:52:43.127Z","updated_at": "2015-10-28T12:29:11.818Z"}'
+  example "Request\ninstitutions/\n#{JSON.pretty_generate(req_example)}"
+  this_example = JSON.parse '{"name": "Coursera", "description":"Online Institution", "created_at": "2015-10-27T16:08:29.099Z"}'
   example "Response:\n#{JSON.pretty_generate(this_example)}"
 
   def update
