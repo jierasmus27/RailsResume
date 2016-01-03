@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     namespace :api, defaults: {format: :json} do
       scope module: :v1, constraints: ApiConstraints.new(version: '1', default: true) do
         resources :institutions,        only: [:index, :show, :create, :update]
+        resources :instructors,         only: [:index, :show, :create]
       end
     end
   end

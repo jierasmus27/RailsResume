@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :instructor do
-    name "MyString"
+    name "MyStringName"
     description "MyText"
     image "MyString"
-    institution nil
+    institution
   end
 end

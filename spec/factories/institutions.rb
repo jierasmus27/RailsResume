@@ -1,6 +1,10 @@
 FactoryGirl.define do
+  sequence :name do |n|
+    "Institution#{n}"
+  end
+
   factory :institution do
-    name "MyString"
+    name
     description "MyText"
     image "MyString"
     institution nil
