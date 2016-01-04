@@ -45,6 +45,9 @@ guard :rspec, cmd: "bundle exec rspec" do
   dsl.watch_spec_files_for(rails.app_files)
   dsl.watch_spec_files_for(rails.views)
 
+  #watch(%r{^app/controllers/api/v1/.+\.rb$})     { |m| "spec/api/v1/#{m[1]}_spec.rb" }
+  watch(%r{^app/controllers/api/v1/(.*)\.rb$})  { |m| "spec/api/v1/#{m[1]}_spec.rb" }
+
   watch(rails.controllers) do |m|
     [
       rspec.spec.("routing/#{m[1]}_routing"),
