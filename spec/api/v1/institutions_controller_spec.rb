@@ -13,7 +13,7 @@ describe Api::V1::InstitutionsController, type: :controller do
 
   context "show calls" do
     it "shows details of the requested institution" do
-      institution = create(:institution)
+      institution = create(:institution_with_children)
 
       get :show, id: institution.id
       expect(assigns(:data)).to eq(institution)
@@ -61,7 +61,6 @@ describe Api::V1::InstitutionsController, type: :controller do
       patch :update, id: @institution, institution: attributes_for(:institution, name: "UKZN")
 
       get :show, id: @institution.id
-
       expect(JSON.parse(response.body)["institution"]["name"]).to eq("UKZN")
     end
 

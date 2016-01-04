@@ -19,6 +19,8 @@ describe Api::V1::InstructorsController, type: :controller do
     end
 
     it "shows details of the requested instructor" do
+      require 'pry'
+      binding.pry
       get :show, id: @instructor.id
       expect(assigns(:data)).to eq(@instructor)
     end
@@ -44,7 +46,7 @@ describe Api::V1::InstructorsController, type: :controller do
       expect(response).to have_http_status(:success)
     end
 
-    it "returns unprocessable_entity for an invalid entity - no institution provided" do
+    it "returns unprocessable_entity for an invalid entity - no institution_id provided" do
       post :create, instructor: {"name" => "Ben Smith", "description" => "University of California - Berkeley"}
       expect(response).to have_http_status(:unprocessable_entity)
     end
@@ -77,11 +79,12 @@ describe Api::V1::InstructorsController, type: :controller do
     end
 
     it "returns a successful response if the update is successful" do
-      patch :update, id: @instructor, instructor: attributes_for(:instructor, name: "Craig Brown")
+      @instructor_attributes["name"] = "Craig Brown"
+      patch :update, id: @instructor, instructor: @instructor_attributes
 
       get :show, id: @instructor.id
 
-      expect(JSON.parse(response.body)["name"]).to eq("Craig Brown")
+      expect(JSON.parse(response.body)["instructor"]["name"]).to eq("Craig Brown")
     end
 
     it "returns unprocessable_entity for an invalid entity - no name provided" do
