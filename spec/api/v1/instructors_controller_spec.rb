@@ -19,8 +19,6 @@ describe Api::V1::InstructorsController, type: :controller do
     end
 
     it "shows details of the requested instructor" do
-      require 'pry'
-      binding.pry
       get :show, id: @instructor.id
       expect(assigns(:data)).to eq(@instructor)
     end

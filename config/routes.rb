@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       scope module: :v1, constraints: ApiConstraints.new(version: '1', default: true) do
         resources :institutions,        only: [:index, :show, :create, :update]
         resources :instructors,         only: [:index, :show, :create, :update]
-        resources :courses,             only: [:index]
+        resources :courses,             only: [:index, :show, :create, :update]
       end
     end
   end

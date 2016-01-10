@@ -19,7 +19,8 @@ class Api::V1::InstitutionsController < Api::V1::BaseController
   example "Response:\n#{JSON.pretty_generate(this_example)}"
 
   def index
-    super
+    @data = model.all
+    render json: @data, each_serializer: InstitutionViewSerializer, root: :institution
   end
 
   api :GET, '/institutions/:id', 'Return data of an Institution based on the id'

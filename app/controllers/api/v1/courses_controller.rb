@@ -21,10 +21,49 @@ class Api::V1::CoursesController < Api::V1::BaseController
     super
   end
 
+  api :GET, '/courses/:id', 'Return data of an Course based on the id'
+  param_group :id
+  error 404, "Record Not Found"
+  description "Returns a hash with course details based on the id passed through"
+  example "Request:\ncourses/1"
+  this_example = JSON.parse '{"id": 1,"name": "Coursera MOOC", "description":"Online Ruby Course", "created_at": "2015-10-27T16:08:29.099Z"}'
+  example "Response:\n#{JSON.pretty_generate(this_example)}"
+
+  def show
+    render json: @data
+  end
+
+  api :POST, '/courses', 'Create a new course'
+  description "Creates an course with the given params"
+  req_example = JSON.parse '{"name" : "Coursera","description":"Online Course"}'
+  example "Request\ncourses/\n#{JSON.pretty_generate(req_example)}"
+  this_example = JSON.parse '{"name": "Coursera MOOC", "description":"Online Ruby Course", "created_at": "2015-10-27T16:08:29.099Z"}'
+  example "Response:\n#{JSON.pretty_generate(this_example)}"
+
+  def create
+    super
+  end
+
+  api :PATCH, '/courses/:id', 'Update a course'
+  error :code => 404, :desc => "Not Found"
+  description "Updates an course entry based on the id and params passed"
+  req_example = JSON.parse '{"name": "New Course Name"}'
+  example "Request\ncourses/\n#{JSON.pretty_generate(req_example)}"
+  this_example = JSON.parse '{"name": "Coursera MOOC", "description":"Online Ruby Course", "created_at": "2015-10-27T16:08:29.099Z"}'
+  example "Response:\n#{JSON.pretty_generate(this_example)}"
+
+  def update
+    super
+  end
+
   private
-  
+
     def model
       Course
+    end
+
+    def controller_params
+      params.require(:course).permit(:course_id,:name,:description,:image_url,:course_id,:instructor_id)
     end
 
 end

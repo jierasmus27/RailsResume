@@ -5,5 +5,4 @@ class Institution < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true
   validates :description, presence: true
-  #validates :parent, presence: true
 end
