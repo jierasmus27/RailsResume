@@ -25,6 +25,12 @@ class Api::V1::BaseController < ApplicationController
     end
   end
 
+  def destroy
+    @data.destroy
+
+    head :no_content
+  end
+
   private
 
     def model

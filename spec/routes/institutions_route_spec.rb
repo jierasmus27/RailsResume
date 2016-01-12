@@ -17,6 +17,10 @@ describe Api::V1::InstitutionsController, :type => :routing do
     it "should route patch requests to the update method" do
       expect(:patch => "/rails_resume/api/institutions/1").to route_to("api/v1/institutions#update", :id => "1", :format => :json)
     end
+
+    it "should route delete requests to the destroy method" do
+      expect(:delete => "/rails_resume/api/institutions/1").to route_to("api/v1/institutions#destroy", :id => "1", :format => :json)
+    end
   end
 
 end

@@ -34,8 +34,20 @@ describe Api::V1::BaseController, type: :controller do
         expect{controller.create}.to raise_error(NotImplementedError)
       end
     end
+  end
 
+  context "calls to destroy" do
+    describe "unsuccessful calls" do
+      it "raises an error that base_model is not defined" do
+        expect{controller.create}.to raise_error(NotImplementedError)
+      end
 
+      it "raises an error that controller_params is not defined" do
+        model = double()
+        expect(controller).to receive(:model).and_return(model)
+        expect{controller.create}.to raise_error(NotImplementedError)
+      end
+    end
   end
 
 

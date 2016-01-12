@@ -35,8 +35,8 @@ class Api::V1::CoursesController < Api::V1::BaseController
 
   api :POST, '/courses', 'Create a new course'
   description "Creates an course with the given params"
-  req_example = JSON.parse '{"name" : "Coursera","description":"Online Course"}'
-  example "Request\ncourses/\n#{JSON.pretty_generate(req_example)}"
+  req_example = JSON.parse '{"name": "Coursera MOOC", "description":"Online Ruby Course", "image_url" : "Url where Image is located", "institution_id" : "1", "instructor_id" : "2"}'
+  example "Request\ncourses\n#{JSON.pretty_generate(req_example)}"
   this_example = JSON.parse '{"name": "Coursera MOOC", "description":"Online Ruby Course", "image_url" : "Url where Image is located", "institution_id" : "1", "instructor_id" : "2"}'
   example "Response:\n#{JSON.pretty_generate(this_example)}"
 

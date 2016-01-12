@@ -80,4 +80,19 @@ describe Api::V1::InstitutionsController, type: :controller do
       expect(response).to have_http_status(:unprocessable_entity)
     end
   end
+
+  context "destroy calls" do
+    before :each do
+      @institution = create(:institution, name: "UCLA", description: "University of California, Los Angeles")
+    end
+
+    it "successfully deletes new institution for a valid entity" do
+      expect{delete :destroy, id: @institution.id}.to change(Institution, :count).by(-1)
+    end
+
+    it "returns unprocessable_entity for an invalid entity - incorrect id provided" do
+      delete :destroy, id: Institution.maximum("id") + 1
+      expect(response).to have_http_status(:not_found)
+    end
+  end
 end
