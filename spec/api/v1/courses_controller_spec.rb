@@ -80,4 +80,21 @@ describe Api::V1::CoursesController, type: :controller do
       expect(response).to have_http_status(:unprocessable_entity)
     end
   end
+
+  context "destroy calls" do
+    before :each do
+      institution = create(:institution)
+      instructor = create(:instructor)
+      @course = create(:course, name: "Some MOOC", description: "Ruby course from UCLA", image_url: "http://no.where/1.jpg", institution_id: institution.id, instructor_id: instructor.id)
+    end
+
+    it "successfully deletes a course for a valid entity" do
+      expect{delete :destroy, id: @course.id}.to change(Course, :count).by(-1)
+    end
+
+    it "returns unprocessable_entity for an invalid entity - incorrect id provided" do
+      delete :destroy, id: Course.maximum("id") + 1
+      expect(response).to have_http_status(:not_found)
+    end
+  end
 end

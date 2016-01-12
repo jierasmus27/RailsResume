@@ -1,5 +1,5 @@
 class Api::V1::CoursesController < Api::V1::BaseController
-  before_action :set_object_from_id, only: [:show, :update]
+  before_action :set_object_from_id, only: [:show, :update, :destroy]
 
   def_param_group :id do
     param :id, :number, "Course ID", :required => true
@@ -53,6 +53,16 @@ class Api::V1::CoursesController < Api::V1::BaseController
   example "Response:\n#{JSON.pretty_generate(this_example)}"
 
   def update
+    super
+  end
+
+  api :DELETE, '/courses/:id', 'Delete a Course based on the id'
+  param_group :id
+  error 404, "Record Not Found"
+  description "Delete a course details based on the id passed through"
+  example "Request:\ncourses/1"
+
+  def destroy
     super
   end
 

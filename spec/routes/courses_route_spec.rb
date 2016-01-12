@@ -17,4 +17,7 @@ describe Api::V1::CoursesController, type: :routing do
     expect(:patch => "rails_resume/api/courses/1").to route_to("api/v1/courses#update", :id => "1", :format => :json)
   end
 
+  it "should route delete calls to the destroy method" do
+    expect(:delete => "rails_resume/api/courses/1").to route_to("api/v1/courses#destroy", :id => "1", :format => :json)
+  end
 end
