@@ -1,4 +1,19 @@
+require 'api_constraints'
+
 Rails.application.routes.draw do
+
+  apipie
+
+  scope "/rails_resume" do
+    namespace :api, defaults: {format: :json} do
+      scope module: :v1, constraints: ApiConstraints.new(version: '1', default: true) do
+        resources :institutions,        only: [:index, :show, :create, :update, :destroy]
+        resources :instructors,         only: [:index, :show, :create, :update]
+        resources :courses,             only: [:index, :show, :create, :update, :destroy]
+      end
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

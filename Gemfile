@@ -25,6 +25,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'pg'
 
+gem 'apipie-rails'
+
+gem 'active_model_serializers'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -51,9 +55,12 @@ end
 
 group :development do
   gem 'guard-rspec', require: false
+  gem 'metric_fu'
+  gem 'pry'
 end
 
 group :test do
+  gem 'simplecov', :require => false
   gem 'shoulda-matchers', '~> 3.0'
   gem 'database_cleaner'
 end
