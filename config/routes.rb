@@ -1,6 +1,7 @@
 require 'api_constraints'
 
 Rails.application.routes.draw do
+  mount_devise_token_auth_for 'User', at: 'auth'
 
   apipie
 
@@ -10,7 +11,14 @@ Rails.application.routes.draw do
         resources :institutions,        only: [:index, :show, :create, :update, :destroy]
         resources :instructors,         only: [:index, :show, :create, :update]
         resources :courses,             only: [:index, :show, :create, :update, :destroy]
+
+        devise_scope :user do
+          post 'sessions' => 'sessions#create', :as => 'login'
+          delete 'sessions' => 'sessions#destroy', :as => 'logout'
+        end
       end
+
+
     end
   end
 
