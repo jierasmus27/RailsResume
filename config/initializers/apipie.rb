@@ -6,6 +6,7 @@ Apipie.configure do |config|
   config.copyright               = "&copy; #{Date.today.year} Rails Resume"
   config.app_info                = "Rails application to display a resume"
   # where is your API defined?
-  config.api_controllers_matcher = "#{Rails.root}/app/controllers/**/*.rb"
+  #config.api_controllers_matcher = "#{Rails.root}/app/controllers/**/*.rb"
   config.validate                = false
+  config.api_controllers_matcher = "#{Rails.root}/app/controllers/api/{[!concerns/]**/*,*}.rb"
 end
