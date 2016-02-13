@@ -62,7 +62,7 @@ end
 group :development do
   gem 'guard-rspec', require: false
   gem 'metric_fu'
-  gem 'pry'
+  gem 'pry-rails'
 end
 
 group :test do
