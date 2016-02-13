@@ -2,20 +2,56 @@
 class Api::V1::InstructorsController < Api::V1::BaseController
   before_action :set_object_from_id, only: [:show, :update]
 
-  def_param_group :id do
-    param :id, :number, "Instructor ID", :required => true
+  include Api::V1::InstructorsDocumentation
+
+  def index
+    @data = model.all
+
+    render json: @data
   end
 
-  resource_description do
-    resource_id 'instructors'
-    short 'Instructors of study'
-    formats ['json']
-    error 422, "Unprocessable Entity"
-    param "Content-Type", String, "Header value, must be equal to 'application/json'"
+  def show
+    render json: @data
   end
 
-  apipie_concern_subst(:resource => 'institution')
-  include BaseV1ApipieModule
+  def create
+    @data = model.new(controller_params)
+
+    if @data.save
+      render json: @data, status: :created
+    else
+      render json: @data.errors, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    if @data.update(controller_params)
+      render(json: @data, status: :ok)
+    else
+      render(json: @data.errors, status: :unprocessable_entity)
+    end
+  end
+
+  def destroy
+    @data.destroy
+
+    head :no_content
+  end
+
+  # def_param_group :id do
+  #   param :id, :number, "Instructor ID", :required => true
+  # end
+  #
+  # resource_description do
+  #   resource_id 'instructors'
+  #   short 'Instructors of study'
+  #   formats ['json']
+  #   error 422, "Unprocessable Entity"
+  #   param "Content-Type", String, "Header value, must be equal to 'application/json'"
+  # end
+  #
+  # apipie_concern_subst(:resource => 'institution')
+  # include BaseV1ApipieModule
 
   # api :GET, '/instructors', 'List all Instructors'
   # description "Returns an array of hashes containing all the instructor data used in the application."
